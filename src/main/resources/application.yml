@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-cloud-zuul
+
+api-host: localhost:9080
+
+zuul:
+  routes:
+    users:
+      path: /users/**
+      url: http://${api-host}/users
+    events:
+      path: /events/**
+      url: http://${api-host}/events
+  sensitive-headers:
+  forceOriginalQueryStringEncoding: true
+  ignored-patterns: /**/custom/**
+  ignored-services: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    routes:
+      enabled: true
+    filters:
+      enabled: true
